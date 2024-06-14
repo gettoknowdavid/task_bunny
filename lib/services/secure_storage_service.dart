@@ -4,12 +4,12 @@ import 'package:task_bunny/core/core.dart';
 
 @lazySingleton
 final class SecureStorageService {
-  SecureStorageService({required FlutterSecureStorage storage})
-      : _storage = storage;
+  static const _location = 'SecureStorageService';
 
   final FlutterSecureStorage _storage;
 
-  static const _location = 'SecureStorageService';
+  SecureStorageService({required FlutterSecureStorage storage})
+      : _storage = storage;
 
   /// Returns true if the storage contains the given [key].
   ///
