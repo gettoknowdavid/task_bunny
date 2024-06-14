@@ -1,0 +1,36 @@
+app:
+  android:
+    flavorDimensions: "flavor-type"
+
+flavors:
+  dev:
+    app:
+      name: "TaskBunny Development"
+    
+    android:
+      applicationId: "com.gtkd.task_bunny.dev"
+
+    ios:
+      bundleId: "com.gtkd.task_bunny.dev"
+
+  stg:
+    app:
+      name: "TaskBunny Staging"
+
+    android:
+      applicationId: "com.gtkd.task_bunny.stg"
+
+    ios:
+      bundleId: "com.gtkd.task_bunny.stg"
+
+  prd:
+    app:
+      name: "TaskBunny Production"
+
+    android:
+      applicationId: "com.gtkd.task_bunny"
+
+    ios:
+      bundleId: "com.gtkd.task_bunny"
+
+ide: idea

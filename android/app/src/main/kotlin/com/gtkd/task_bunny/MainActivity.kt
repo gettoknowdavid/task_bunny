@@ -1,4 +1,4 @@
-package com.example.task_bunny
+package com.gtkd.task_bunny
 
 import io.flutter.embedding.android.FlutterActivity
 

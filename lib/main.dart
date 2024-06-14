@@ -1,20 +1,15 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 
-void main() {
-  runApp(const MainApp());
-}
+import 'app_tb.dart';
+import 'core/core.dart';
 
-class MainApp extends StatelessWidget {
-  const MainApp({super.key});
+FutureOr<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
 
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
-  }
+  // Initializes all dependencies before running the application
+  configureDependencies();
+  
+  runApp(const AppTB());
 }
