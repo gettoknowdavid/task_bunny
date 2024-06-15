@@ -8,8 +8,11 @@ class AppTB extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
-      routerConfig: TBNavigation.instance.router,
       debugShowCheckedModeBanner: false,
+      routerConfig: TBNavigation.instance.router,
+      theme: TBTheme.light,
+      darkTheme: TBTheme.dark,
+      themeMode: ThemeMode.light,
     );
   }
 }
