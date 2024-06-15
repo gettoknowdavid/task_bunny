@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:task_bunny/core/tb_injector/tb_injector.dart';
-import 'package:task_bunny/features/auth/auth.dart';
+import 'package:task_bunny/core/tb_logger/tb_logger.dart';
 import 'package:task_bunny/features/features.dart';
-import 'package:task_bunny/features/home/home.dart';
-
-import '../../tb_logger/tb_logger.dart';
 
 part 'tb_navigation.g.dart';
 part 'tb_routes.dart';
