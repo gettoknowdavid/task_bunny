@@ -2,11 +2,14 @@ import 'package:dartz/dartz.dart';
 import 'package:task_bunny/core/core.dart';
 
 import 'auth_exception.dart';
+import 'auth_status.dart';
 import 'entities/entities.dart';
 import 'value_objects/value_objects.dart';
 
 abstract class IAuthFacade {
-  Future<Option<User>> getSignedInUser();
+  Stream<AuthStatus> get authStatusChanges;
+
+  User? get currentUser;
 
   Future<Either<AuthException, Unit>> signIn({
     required Email email,

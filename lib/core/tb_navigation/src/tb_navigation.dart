@@ -1,15 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:task_bunny/features/auth/auth.dart';
 import 'package:task_bunny/features/features.dart';
+import 'package:task_bunny/features/home/home.dart';
 
 import '../../tb_logger/tb_logger.dart';
 
 part 'tb_navigation.g.dart';
 part 'tb_routes.dart';
 
-final class TBNavigation {
-  TBNavigation._();
+@TypedGoRoute<HomeRoute>(path: TBRoutes.home)
+class HomeRoute extends GoRouteData {
+  const HomeRoute();
 
+  @override
+  Widget build(context, state) => const HomePage();
+}
+
+@TypedGoRoute<SignInRoute>(path: TBRoutes.signIn)
+class SignInRoute extends GoRouteData {
+  const SignInRoute();
+
+  @override
+  Widget build(context, state) => const SignInPage();
+}
+
+@TypedGoRoute<SignUpRoute>(path: TBRoutes.signUp)
+class SignUpRoute extends GoRouteData {
+  const SignUpRoute();
+
+  @override
+  Widget build(context, state) => const SignUpPage();
+}
+
+@TypedGoRoute<SplashRoute>(path: TBRoutes.splash)
+class SplashRoute extends GoRouteData {
+  const SplashRoute();
+
+  @override
+  Widget build(context, state) => const SplashPage();
+}
+
+final class TBNavigation {
   static const _location = 'TBNavigation';
   static final TBNavigation _instance = TBNavigation._();
   static TBNavigation get instance => _instance;
@@ -19,13 +51,15 @@ final class TBNavigation {
     initialLocation: TBRoutes.splash,
   );
 
-  GoRouter get router => _router;
+  TBNavigation._();
 
   bool get canPop => router.canPop();
 
-  Future<T?> push<T extends Object?>(String location, {Object? extra}) async {
-    TBLogger.info(location: _location, message: 'push to $location');
-    return _router.push(location, extra: extra);
+  GoRouter get router => _router;
+
+  Future<void> go<T extends Object?>(String location, {Object? extra}) async {
+    TBLogger.info(location: _location, message: 'go to $location');
+    return _router.go(location, extra: extra);
   }
 
   Future<void> pop<T extends Object?>([T? result]) async {
@@ -33,21 +67,13 @@ final class TBNavigation {
     return _router.pop(result);
   }
 
-  Future<void> go<T extends Object?>(String location, {Object? extra}) async {
-    TBLogger.info(location: _location, message: 'go to $location');
-    return _router.go(location, extra: extra);
+  Future<T?> push<T extends Object?>(String location, {Object? extra}) async {
+    TBLogger.info(location: _location, message: 'push to $location');
+    return _router.push(location, extra: extra);
   }
 
   void refresh() {
     TBLogger.info(location: _location, message: 'refreshing');
     _router.refresh();
   }
-}
-
-@TypedGoRoute<SplashRoute>(path: TBRoutes.splash)
-class SplashRoute extends GoRouteData {
-  const SplashRoute();
-
-  @override
-  Widget build(context, state) => const SplashPage();
 }

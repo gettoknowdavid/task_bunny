@@ -10,5 +10,6 @@ abstract class User with _$User implements IEntity {
     required UniqueID uid,
     required SingleLineString name,
     required Email email,
+    ProfilePicture? photoURL,
   }) = _User;
 }

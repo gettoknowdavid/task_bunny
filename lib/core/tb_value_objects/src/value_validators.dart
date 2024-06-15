@@ -16,6 +16,16 @@ Either<ValueFailure<String>, String> validateEmail(String input) {
   }
 }
 
+Either<ValueFailure<String>, String?> validateImageUrl(String? input) {
+  if (input == null || input == '') return right(null);
+
+  if (input.startsWith('http') || input.startsWith('https')) {
+    return right(input);
+  } else {
+    return left(ValueFailure.invalidPhotoUrl(failedValue: input));
+  }
+}
+
 Either<ValueFailure<String>, String> validateNotEmpty(String input) {
   if (input.isEmpty) {
     return left(ValueFailure.empty(failedValue: input));
