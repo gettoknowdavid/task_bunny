@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
+import 'package:task_bunny/core/tb_injector/tb_injector.dart';
 import 'package:task_bunny/features/auth/auth.dart';
 import 'package:task_bunny/features/features.dart';
 import 'package:task_bunny/features/home/home.dart';
@@ -22,7 +24,12 @@ class SignInRoute extends GoRouteData {
   const SignInRoute();
 
   @override
-  Widget build(context, state) => const SignInPage();
+  Widget build(context, state) {
+    return BlocProvider(
+      create: (_) => di<SignInFormCubit>(),
+      child: const SignInPage(),
+    );
+  }
 }
 
 @TypedGoRoute<SignUpRoute>(path: TBRoutes.signUp)
@@ -30,7 +37,12 @@ class SignUpRoute extends GoRouteData {
   const SignUpRoute();
 
   @override
-  Widget build(context, state) => const SignUpPage();
+  Widget build(context, state) {
+    return BlocProvider(
+      create: (_) => di<SignUpFormCubit>(),
+      child: const SignUpPage(),
+    );
+  }
 }
 
 @TypedGoRoute<SplashRoute>(path: TBRoutes.splash)
