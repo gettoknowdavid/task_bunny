@@ -41,15 +41,17 @@ class SignUpPage extends StatelessWidget {
             children: [
               TBScreenUtil.vSpace(20),
               TBText(
-                'Create a new account with Google or you can use your credentials.',
+                'Create a new account with your credentials or with Google sign in.',
                 style: TBTextStyle.captionBold,
                 color: colors.onSurface.opaque(0.8),
               ),
               TBScreenUtil.vSpace(24),
-              const OrDividerWidget(),
-              TBScreenUtil.vSpace(24),
               const SignUpForm(),
-              TBScreenUtil.vSpace(24),
+              TBScreenUtil.vSpace(12),
+              const OrDividerWidget(),
+              TBScreenUtil.vSpace(12),
+              const GoogleSignInButton(),
+              TBScreenUtil.vSpace(16),
               AuthRedirectWidget(
                 mainText: 'Already got an account?',
                 buttonLabel: 'Sign In now',

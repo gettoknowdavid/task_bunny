@@ -27,9 +27,9 @@ class _SignUpFormState extends State<SignUpForm> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           const _NameField(),
-          TBScreenUtil.vSpace(20),
+          TBScreenUtil.vSpace(16),
           const _EmailField(),
-          TBScreenUtil.vSpace(20),
+          TBScreenUtil.vSpace(16),
           const _PasswordField(),
           TBScreenUtil.vSpace(30),
           const _SignUpButton(),
@@ -49,7 +49,7 @@ class _NameField extends StatelessWidget {
       builder: (context, state) => TBAuthTextFormField(
         label: 'Full Name',
         hintText: 'Your full name',
-        icon: PhosphorIconsBold.identificationBadge,
+        icon: PhosphorIconsBold.user,
         onChanged: context.read<SignUpFormCubit>().emailChanged,
         enabled: !state.loading,
         validator: (_) => context.validator(state.name.value),

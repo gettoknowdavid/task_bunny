@@ -59,6 +59,14 @@ class SignUpRoute extends GoRouteData {
   }
 }
 
+@TypedGoRoute<EmailVerificationRoute>(path: TBRoutes.verification)
+class EmailVerificationRoute extends GoRouteData {
+  const EmailVerificationRoute();
+
+  @override
+  Widget build(context, state) => const EmailVerificationPage();
+}
+
 @TypedGoRoute<SplashRoute>(path: TBRoutes.splash)
 class SplashRoute extends GoRouteData {
   const SplashRoute();
@@ -70,10 +78,10 @@ class SplashRoute extends GoRouteData {
 abstract class TBRouter {
   static final routerConfig = GoRouter(
     routes: $appRoutes,
-    initialLocation: TBRoutes.splash,
+    initialLocation: TBRoutes.home,
     refreshListenable: di<AuthCubit>(),
     redirect: (context, state) {
-      final status = context.read<AuthCubit>().state;
+      final status = di<AuthCubit>().state;
       log('[AppRouter] => $status');
       final isAllowedPath = status.allowedPaths.contains(state.fullPath);
       if (!isAllowedPath) return status.redirectPath;

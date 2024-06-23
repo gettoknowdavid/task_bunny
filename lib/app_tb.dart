@@ -11,6 +11,7 @@ class AppTB extends StatefulWidget {
 }
 
 class _AppTBState extends State<AppTB> {
+  final routerConfig = TBRouter.routerConfig;
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
@@ -18,7 +19,9 @@ class _AppTBState extends State<AppTB> {
       minTextAdapt: true,
       builder: (context, child) => MaterialApp.router(
         debugShowCheckedModeBanner: false,
-        routerConfig: TBRouter.routerConfig,
+        routerDelegate: routerConfig.routerDelegate,
+        routeInformationParser: routerConfig.routeInformationParser,
+        routeInformationProvider: routerConfig.routeInformationProvider,
         theme: TBTheme.light,
         darkTheme: TBTheme.dark,
         builder: (context, child) {

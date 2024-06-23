@@ -19,7 +19,10 @@ class SignInFormCubit extends Cubit<SignInFormState> {
   }
 
   void passwordChanged(String passwordStr) {
-    emit(state.copyWith(password: Password(passwordStr), option: none()));
+    emit(state.copyWith(
+      password: Password(passwordStr, isSignIn: true),
+      option: none(),
+    ));
   }
 
   Future<void> signIn() async {

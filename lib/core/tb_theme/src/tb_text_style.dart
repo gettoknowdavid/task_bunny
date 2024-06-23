@@ -119,6 +119,15 @@ final class TBTextStyle extends TextStyle {
     letterSpacing: 0,
   );
 
+  static const textLabel = TBTextStyle._(
+    fontSize: 12.0,
+    fontWeight: FontWeight.w600,
+    fontFamily: _fontFamily,
+    textBaseline: TextBaseline.alphabetic,
+    letterSpacing: 0,
+    decoration: TextDecoration.underline,
+  );
+
   static const error = TBTextStyle._(
     fontSize: 11.0,
     fontWeight: FontWeight.w600,
@@ -134,5 +143,6 @@ final class TBTextStyle extends TextStyle {
     super.textBaseline,
     super.letterSpacing,
     super.height,
+    super.decoration,
   });
 }

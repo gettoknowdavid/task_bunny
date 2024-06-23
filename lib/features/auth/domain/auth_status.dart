@@ -17,8 +17,8 @@ enum AuthStatus {
   ),
 
   unverified(
-    redirectPath: '',
-    allowedPaths: [],
+    redirectPath: TBRoutes.verification,
+    allowedPaths: [TBRoutes.verification],
   );
 
   const AuthStatus({

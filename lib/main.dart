@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:provider/provider.dart';
 
 import 'app_tb.dart';
 import 'core/core.dart';
@@ -14,9 +15,12 @@ FutureOr<void> main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   configureDependencies();
   runApp(
-    BlocProvider(
+    ChangeNotifierProvider(
       create: (context) => di<AuthCubit>(),
-      child:  const AppTB( ),
+      child: BlocProvider(
+        create: (context) => di<AuthCubit>(),
+        child: const AppTB(),
+      ),
     ),
   );
 }
