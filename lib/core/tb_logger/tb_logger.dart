@@ -53,20 +53,19 @@ final class TBLogger {
     StackTrace? stackTrace,
     bool useLog = true,
   }) {
-    final timestamp = DateTime.now().toIso8601String();
-    String logMsg = '[${level.label} $emoji][$location][$timestamp]: $message';
+    String logMessage = '[${level.label} $emoji][$location]: $message';
 
     if (level == _LogLevel.error && errorObject != null) {
-      logMsg += '\nError: $errorObject';
-      if (stackTrace != null) logMsg += '\nStackTrace: $stackTrace';
+      logMessage += '\nError: $errorObject';
+      if (stackTrace != null) logMessage += '\nStackTrace: $stackTrace';
     }
 
     if (useLog) {
-      log(logMsg);
+      log(logMessage);
       return;
     }
 
-    debugPrint(logMsg);
+    debugPrint(logMessage);
   }
 }
 

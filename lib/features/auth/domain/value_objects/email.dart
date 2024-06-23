@@ -5,7 +5,9 @@ class Email extends ValueObject<String> {
   @override
   final Either<ValueFailure<String>, String> value;
 
-  factory Email(String input) => Email._(validateEmail(input));
+  factory Email(String input) {
+    return Email._(validateEmail(input).flatMap(validateNotEmpty));
+  }
 
   const Email._(this.value);
 }

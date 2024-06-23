@@ -15,6 +15,7 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:internet_connection_checker/internet_connection_checker.dart'
     as _i5;
 
+import '../../features/auth/application/auth/auth_bloc.dart' as _i12;
 import '../../features/auth/application/sign_in_form/sign_in_form_cubit.dart'
     as _i10;
 import '../../features/auth/application/sign_up_form/sign_up_form_cubit.dart'
@@ -23,7 +24,7 @@ import '../../features/auth/domain/domain.dart' as _i8;
 import '../../features/auth/infrastructure/auth_facade.dart' as _i9;
 import '../../services/network_service.dart' as _i6;
 import '../../services/secure_storage_service.dart' as _i7;
-import 'register_module.dart' as _i12;
+import 'register_module.dart' as _i13;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -52,8 +53,10 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i10.SignInFormCubit(facade: gh<_i8.IAuthFacade>()));
     gh.lazySingleton<_i11.SignUpFormCubit>(
         () => _i11.SignUpFormCubit(facade: gh<_i8.IAuthFacade>()));
+    gh.factory<_i12.AuthBloc>(
+        () => _i12.AuthBloc(facade: gh<_i8.IAuthFacade>()));
     return this;
   }
 }
 
-class _$RegisterModule extends _i12.RegisterModule {}
+class _$RegisterModule extends _i13.RegisterModule {}

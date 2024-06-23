@@ -10,6 +10,7 @@ dependencies:
   bloc: ^8.1.4
   cloud_firestore: ^5.0.1
   dartz: ^0.10.1
+  figma_squircle: ^0.5.3
   firebase_auth: ^5.1.0
   firebase_core: ^3.1.0
   firebase_storage: ^12.0.1
@@ -18,6 +19,7 @@ dependencies:
   flutter_bloc: ^8.1.6
   flutter_flavorizr: ^2.2.3
   flutter_gen: ^5.5.0+1
+  flutter_hooks: ^0.20.5
   flutter_screenutil: ^5.9.3
   flutter_secure_storage: ^9.2.2
   freezed_annotation: ^2.4.1
@@ -27,6 +29,7 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   json_annotation: ^4.9.0
   meta: ^1.12.0
+  phosphor_flutter: ^2.1.0
   uuid: ^4.4.0
 
 dev_dependencies:
@@ -51,3 +54,10 @@ flutter:
     - family: Inter
       fonts:
         - asset: assets/fonts/Inter.ttf
+    - family: PhosphorIcons
+      fonts:
+        - asset: assets/fonts/PhosphorIcons-Duotone.ttf
+        - asset: assets/fonts/PhosphorIcons-Fill.ttf
+    - family: PhosphorIconsRegular
+      fonts:
+        - asset: assets/fonts/PhosphorIcons-Regular.ttf

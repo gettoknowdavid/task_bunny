@@ -50,7 +50,7 @@ class AuthFacade implements IAuthFacade {
       );
       return right(unit);
     } on firebase_auth.FirebaseAuthException catch (e) {
-      return left(AuthException.message(e.message));
+      return left(AuthException.message(e.message ?? TBStrings.unknownError));
     }
   }
 
@@ -75,7 +75,7 @@ class AuthFacade implements IAuthFacade {
       await result.user?.reload();
       return right(unit);
     } on firebase_auth.FirebaseAuthException catch (e) {
-      return left(AuthException.message(e.message));
+      return left(AuthException.message(e.message ?? TBStrings.unknownError));
     }
   }
 }

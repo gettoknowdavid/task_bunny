@@ -38,7 +38,7 @@ final class TBTextStyle extends TextStyle {
   );
 
   static const heading2Light = TBTextStyle._(
-    fontSize: 18.0,
+    fontSize: 20.0,
     fontWeight: FontWeight.w200,
     fontFamily: _fontFamily,
     textBaseline: TextBaseline.alphabetic,
@@ -46,7 +46,7 @@ final class TBTextStyle extends TextStyle {
   );
 
   static const heading2Medium = TBTextStyle._(
-    fontSize: 18.0,
+    fontSize: 20.0,
     fontWeight: FontWeight.w400,
     fontFamily: _fontFamily,
     textBaseline: TextBaseline.alphabetic,
@@ -54,7 +54,7 @@ final class TBTextStyle extends TextStyle {
   );
 
   static const heading2Bold = TBTextStyle._(
-    fontSize: 18.0,
+    fontSize: 20.0,
     fontWeight: FontWeight.w600,
     fontFamily: _fontFamily,
     textBaseline: TextBaseline.alphabetic,
@@ -62,7 +62,7 @@ final class TBTextStyle extends TextStyle {
   );
 
   static const heading3Bold = TBTextStyle._(
-    fontSize: 14.0,
+    fontSize: 18.0,
     fontWeight: FontWeight.w600,
     fontFamily: _fontFamily,
     textBaseline: TextBaseline.alphabetic,
@@ -71,39 +71,32 @@ final class TBTextStyle extends TextStyle {
   );
 
   static const bodyLight = TBTextStyle._(
-    fontSize: 16.0,
+    fontSize: 14.0,
     fontWeight: FontWeight.w200,
     fontFamily: _fontFamily,
     textBaseline: TextBaseline.alphabetic,
     letterSpacing: 0,
   );
 
-  static const bodyMedium = TBTextStyle._(
-    fontSize: 16.0,
-    fontWeight: FontWeight.w400,
-    fontFamily: _fontFamily,
-    textBaseline: TextBaseline.alphabetic,
-    letterSpacing: 0,
-  );
-
-  static const bodyBold = TBTextStyle._(
-    fontSize: 16.0,
+  static const bodyRegular = TBTextStyle._(
+    fontSize: 14.0,
     fontWeight: FontWeight.w600,
     fontFamily: _fontFamily,
     textBaseline: TextBaseline.alphabetic,
     letterSpacing: 0,
   );
 
-  static const bodySmall = TBTextStyle._(
+  static const bodyBold = TBTextStyle._(
     fontSize: 14.0,
-    fontWeight: FontWeight.w400,
+    fontWeight: FontWeight.w600,
     fontFamily: _fontFamily,
     textBaseline: TextBaseline.alphabetic,
     letterSpacing: 0,
   );
 
+
   static const caption = TBTextStyle._(
-    fontSize: 12.0,
+    fontSize: 13.0,
     fontWeight: FontWeight.w400,
     fontFamily: _fontFamily,
     textBaseline: TextBaseline.alphabetic,
@@ -112,18 +105,26 @@ final class TBTextStyle extends TextStyle {
 
   static const captionBold = TBTextStyle._(
     fontSize: 13.0,
-    fontWeight: FontWeight.w600,
+    fontWeight: FontWeight.w700,
     fontFamily: _fontFamily,
     textBaseline: TextBaseline.alphabetic,
     letterSpacing: 0,
   );
 
   static const label = TBTextStyle._(
-    fontSize: 14.0,
-    fontWeight: FontWeight.w400,
+    fontSize: 12.0,
+    fontWeight: FontWeight.w600,
     fontFamily: _fontFamily,
     textBaseline: TextBaseline.alphabetic,
     letterSpacing: 0,
+  );
+
+  static const error = TBTextStyle._(
+    fontSize: 11.0,
+    fontWeight: FontWeight.w600,
+    fontFamily: _fontFamily,
+    textBaseline: TextBaseline.alphabetic,
+    letterSpacing: -0.5,
   );
 
   const TBTextStyle._({

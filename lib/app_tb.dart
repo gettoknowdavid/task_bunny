@@ -10,21 +10,24 @@ class AppTB extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final navigation = TBNavigation(authBloc: context.watch<AuthBloc>());
-    final textScaler = TextScaler.linear(1.sp);
+    final navigation = TBRouter(authBloc: context.watch<AuthBloc>());
 
     return ScreenUtilInit(
       ensureScreenSize: true,
+      minTextAdapt: true,
       builder: (context, child) => MaterialApp.router(
         debugShowCheckedModeBanner: false,
         routerConfig: navigation.router,
         theme: TBTheme.light,
         darkTheme: TBTheme.dark,
-        themeMode: ThemeMode.light,
-        builder: (context, child) => MediaQuery(
-          data: MediaQuery.of(context).copyWith(textScaler: textScaler),
-          child: child!,
-        ),
+        // themeMode: ThemeMode.light,
+        builder: (context, child) {
+          final textScaler = TextScaler.linear(1.sp);
+          return MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaler: textScaler),
+            child: child!,
+          );
+        },
       ),
     );
   }

@@ -4,7 +4,7 @@ part 'auth_exception.freezed.dart';
 
 @freezed
 class AuthException with _$AuthException {
-  const factory AuthException.message([String? message]) = _Message;
+  const factory AuthException.message(String message) = _Message;
   const factory AuthException.invalidEmailOrPassword() = _InvalidEmailOrPassword;
   const factory AuthException.unableToVerifyEmail() = _UnableToVerifyEmail;
   const factory AuthException.emailAlreadyInUse() = _EmailAlreadyInUse;

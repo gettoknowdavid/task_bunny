@@ -1,4 +1,4 @@
-part of 'tb_navigation.dart';
+part of 'tb_router.dart';
 
 final class TBRoutes {
   TBRoutes._();

@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
@@ -5,7 +7,7 @@ import 'package:task_bunny/core/tb_injector/tb_injector.dart';
 import 'package:task_bunny/core/tb_logger/tb_logger.dart';
 import 'package:task_bunny/features/features.dart';
 
-part 'tb_navigation.g.dart';
+part 'tb_router.g.dart';
 part 'tb_routes.dart';
 
 @TypedGoRoute<HomeRoute>(path: TBRoutes.home)
@@ -21,9 +23,15 @@ class SignInRoute extends GoRouteData {
   const SignInRoute();
 
   @override
+  FutureOr<bool> onExit(BuildContext context, GoRouterState state) {
+    di<SignInFormCubit>().close();
+    return super.onExit(context, state);
+  }
+
+  @override
   Widget build(context, state) {
-    return BlocProvider(
-      create: (_) => di<SignInFormCubit>(),
+    return BlocProvider.value(
+      value: di<SignInFormCubit>(),
       child: const SignInPage(),
     );
   }
@@ -35,8 +43,8 @@ class SignUpRoute extends GoRouteData {
 
   @override
   Widget build(context, state) {
-    return BlocProvider(
-      create: (_) => di<SignUpFormCubit>(),
+    return BlocProvider.value(
+      value: di<SignUpFormCubit>(),
       child: const SignUpPage(),
     );
   }
@@ -50,17 +58,29 @@ class SplashRoute extends GoRouteData {
   Widget build(context, state) => const SplashPage();
 }
 
-final class TBNavigation {
-  static const _location = 'TBNavigation';
-  static final TBNavigation _instance = TBNavigation._();
-  static TBNavigation get instance => _instance;
+final class TBRouter {
+  final AuthBloc _authBloc;
 
-  final _router = GoRouter(
+  TBRouter({required AuthBloc authBloc}) : _authBloc = authBloc;
+
+  static const _location = 'TBNavigation';
+ 
+  ValueNotifier<AuthStatus> get status => _authBloc.authStatusNotifier;
+
+  late final _router = GoRouter(
     routes: $appRoutes,
     initialLocation: TBRoutes.splash,
-  );
+    refreshListenable: _authBloc.authStatusNotifier,
+    redirect: (context, state) {
+      final isAllowedPath = status.value.allowedPaths.contains(state.fullPath);
 
-  TBNavigation._();
+      // if (!isOnboarded && !isAllowedPath) return OnboardingRoute.path;
+
+      if (!isAllowedPath) return status.value.redirectPath;
+
+      return null;
+    },
+  );
 
   bool get canPop => router.canPop();
 
