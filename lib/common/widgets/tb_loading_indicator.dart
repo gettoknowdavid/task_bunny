@@ -8,9 +8,11 @@ class TBLoadingIndicator extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox.square(
-      dimension: TBScreenUtil.r(dimension),
-      child: const CircularProgressIndicator(),
+    return Center(
+      child: SizedBox.square(
+        dimension: TBScreenUtil.r(dimension),
+        child: const CircularProgressIndicator(),
+      ),
     );
   }
 }

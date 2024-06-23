@@ -1,6 +1,11 @@
 import 'package:task_bunny/core/core.dart';
 
 enum AuthStatus {
+  loading(
+    redirectPath: TBRoutes.loading,
+    allowedPaths: [TBRoutes.loading],
+  ),
+
   unauthenticated(
     redirectPath: TBRoutes.signIn,
     allowedPaths: [TBRoutes.signUp, TBRoutes.signIn],

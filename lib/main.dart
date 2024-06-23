@@ -11,15 +11,11 @@ import 'firebase_options.dart';
 
 FutureOr<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-
-  // Initializes all dependencies before running the application
   configureDependencies();
-
   runApp(
     BlocProvider(
-      create: (context) => di<AuthBloc>(),
+      create: (context) => di<AuthCubit>(),
       child:  const AppTB( ),
     ),
   );

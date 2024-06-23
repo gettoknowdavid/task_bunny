@@ -21,8 +21,6 @@ class AuthFacade implements IAuthFacade {
       AuthStatus authStatus;
       if (user == null) {
         authStatus = AuthStatus.unauthenticated;
-      } else if (!user.emailVerified) {
-        authStatus = AuthStatus.unverified;
       } else {
         authStatus = AuthStatus.authenticated;
       }

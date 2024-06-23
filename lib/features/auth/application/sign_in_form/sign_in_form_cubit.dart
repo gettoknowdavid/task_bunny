@@ -42,4 +42,8 @@ class SignInFormCubit extends Cubit<SignInFormState> {
       option: optionOf(failureOrSuccess),
     ));
   }
+
+  void reset() {
+    emit(SignInFormState.initial());
+  }
 }

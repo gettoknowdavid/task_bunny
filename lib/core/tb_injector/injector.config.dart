@@ -15,7 +15,7 @@ import 'package:injectable/injectable.dart' as _i2;
 import 'package:internet_connection_checker/internet_connection_checker.dart'
     as _i5;
 
-import '../../features/auth/application/auth/auth_bloc.dart' as _i12;
+import '../../features/auth/application/auth_cubit.dart' as _i12;
 import '../../features/auth/application/sign_in_form/sign_in_form_cubit.dart'
     as _i10;
 import '../../features/auth/application/sign_up_form/sign_up_form_cubit.dart'
@@ -53,8 +53,8 @@ extension GetItInjectableX on _i1.GetIt {
         () => _i10.SignInFormCubit(facade: gh<_i8.IAuthFacade>()));
     gh.lazySingleton<_i11.SignUpFormCubit>(
         () => _i11.SignUpFormCubit(facade: gh<_i8.IAuthFacade>()));
-    gh.factory<_i12.AuthBloc>(
-        () => _i12.AuthBloc(facade: gh<_i8.IAuthFacade>()));
+    gh.lazySingleton<_i12.AuthCubit>(
+        () => _i12.AuthCubit(facade: gh<_i8.IAuthFacade>()));
     return this;
   }
 }

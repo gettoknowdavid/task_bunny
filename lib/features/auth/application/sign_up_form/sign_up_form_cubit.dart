@@ -42,7 +42,6 @@ class SignUpFormCubit extends Cubit<SignUpFormState> {
         password: state.password,
       );
     }
-
     emit(state.copyWith(
       showErrorMessage: false,
       loading: false,
