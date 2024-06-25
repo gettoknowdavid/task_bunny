@@ -23,8 +23,8 @@ extension AuthX on BuildContext {
     bool isError = true,
   }) {
     final colors = Theme.of(this).colorScheme;
-    final effectiveColor = isError ? colors.error : colors.secondary;
-    final effectiveTextColor = isError ? colors.onError : colors.onSecondary;
+    final effectiveColor = isError ? colors.error : TBColors.green;
+    final effectiveTextColor = isError ? colors.onError : TBColors.black;
     return ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
         content: TBText(errorMessage, color: effectiveTextColor),

@@ -26,8 +26,8 @@ class EmailVerificationCubit extends Cubit<EmailVerificationState> {
         super(const EmailVerificationState.initial()) {
     _subscription = _facade.authStatusChanges.listen((status) {
       if (status == AuthStatus.unverified) {
-        _timer = Timer.periodic(const Duration(seconds: 5), (_) async {
-          await checkEmailVerified();
+        _timer = Timer.periodic(const Duration(seconds: 30), (_) async {
+          await _periodicallyCheckEmailVerified();
         });
       }
     });
@@ -36,14 +36,31 @@ class EmailVerificationCubit extends Cubit<EmailVerificationState> {
   Future<void> cancel() async {
     emit(const EmailVerificationState.verificationInProgress());
     unawaited(_facade.signOut());
+    _timer?.cancel();
     emit(const EmailVerificationState.verificationCancelled());
+  }
+
+  Future<void> _periodicallyCheckEmailVerified() async {
+    final verificationOption = await _facade.checkEmailVerified();
+    verificationOption.fold(
+      () => null,
+      (_) {
+        _timer?.cancel();
+        emit(const EmailVerificationState.verificationSuccess());
+      },
+    );
   }
 
   Future<void> checkEmailVerified() async {
     final verificationOption = await _facade.checkEmailVerified();
     verificationOption.fold(
-      () => null,
-      (_) => const EmailVerificationState.verificationSuccess(),
+      () => emit(const EmailVerificationState.verificationFailure(
+        AuthException.message('Not verified'),
+      )),
+      (_) {
+        _timer?.cancel();
+        emit(const EmailVerificationState.verificationSuccess());
+      },
     );
   }
 
@@ -56,7 +73,7 @@ class EmailVerificationCubit extends Cubit<EmailVerificationState> {
     final failureOrSuccess = await _facade.sendVerificationEmail();
     failureOrSuccess.fold(
       (failure) => emit(EmailVerificationState.verificationFailure(failure)),
-      (success) => const EmailVerificationState.verificationMailSent(),
+      (success) => emit(const EmailVerificationState.verificationMailSent()),
     );
   }
 

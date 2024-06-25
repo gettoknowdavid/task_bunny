@@ -25,10 +25,13 @@ class EmailVerificationPage extends StatelessWidget {
               message: (message) => message,
             ),
           ),
-          verificationMailSent: () => context.showTBSnackBar(
-            'Verification mail sent! Check you inbox or spam.',
-            isError: false,
-          ),
+          verificationMailSent: () {
+            Navigator.pop(context);
+            context.showTBSnackBar(
+              'Verification mail sent! Check you inbox or spam.',
+              isError: false,
+            );
+          },
         );
       },
       builder: (context, state) => Scaffold(
@@ -59,6 +62,11 @@ class EmailVerificationPage extends StatelessWidget {
                 color: colors.onSurface.opaque(0.6),
               ),
               const Spacer(),
+              TBPrimaryButton(
+                label: 'Check Verification',
+                onTap: bloc.checkEmailVerified,
+              ),
+              TBScreenUtil.vSpace(16),
               TBPrimaryButton(
                 label: 'Open your email app',
                 onTap: () => bloc.openMailApp(context),
