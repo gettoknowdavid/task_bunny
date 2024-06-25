@@ -70,6 +70,9 @@ class DefaultFirebaseOptions {
     messagingSenderId: '965574249277',
     projectId: 'taskbunny-255a6',
     storageBucket: 'taskbunny-255a6.appspot.com',
+    androidClientId: '965574249277-b649c6qfmjqrvlfle0gber8p1qm63va8.apps.googleusercontent.com',
+    iosClientId: '965574249277-jihgh8kbnkm8j2s5fcbumkolgl123k1t.apps.googleusercontent.com',
     iosBundleId: 'com.example.taskBunny',
   );
+
 }

@@ -5,5 +5,6 @@ final class TBStrings {
   static const String invalidEmail = 'Invalid email address';
   static const String invalidPassword = 'Invalid password';
   static const String unknownError = 'Unknown error';
+  static const String cancelledByUser = 'The operation was cancelled';
   static const String emptyError = 'This field cannot be empty';
 }

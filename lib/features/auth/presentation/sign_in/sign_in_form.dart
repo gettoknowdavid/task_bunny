@@ -57,7 +57,7 @@ class _EmailField extends StatelessWidget {
         icon: PhosphorIconsBold.at,
         hintText: 'Your email address',
         onChanged: context.read<SignInFormCubit>().emailChanged,
-        enabled: !state.loading,
+        enabled: !state.loading || !state.googleSignInLoading,
         validator: (_) => context.validator(state.email.value),
       ),
     );
@@ -76,7 +76,7 @@ class _PasswordField extends StatelessWidget {
         hintText: 'Your password',
         isPassword: true,
         onChanged: context.read<SignInFormCubit>().passwordChanged,
-        enabled: !state.loading,
+        enabled: !state.loading || !state.googleSignInLoading,
         validator: (_) => context.validator(state.password.value),
       ),
     );
@@ -89,9 +89,11 @@ class _SignInButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final bloc = context.watch<SignInFormCubit>();
     return TBPrimaryButton(
       label: 'Sign In',
-      loading: context.watch<SignInFormCubit>().state.loading,
+      loading: bloc.state.loading,
+      disabled: bloc.state.loading || bloc.state.googleSignInLoading,
       onTap: () {
         if (Form.of(context).validate()) {
           context.read<SignInFormCubit>().signIn();

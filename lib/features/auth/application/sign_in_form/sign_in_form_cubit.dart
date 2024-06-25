@@ -27,10 +27,8 @@ class SignInFormCubit extends Cubit<SignInFormState> {
 
   Future<void> signIn() async {
     late Either<AuthException, Unit> failureOrSuccess;
-
     final isEmailValid = state.email.isValid;
     final isPasswordValid = state.password.isValid;
-
     if (isEmailValid && isPasswordValid) {
       emit(state.copyWith(loading: true, option: none()));
       failureOrSuccess = await _facade.signIn(
@@ -38,7 +36,6 @@ class SignInFormCubit extends Cubit<SignInFormState> {
         password: state.password,
       );
     }
-
     emit(state.copyWith(
       showErrorMessage: false,
       loading: false,
@@ -46,7 +43,13 @@ class SignInFormCubit extends Cubit<SignInFormState> {
     ));
   }
 
-  void reset() {
-    emit(SignInFormState.initial());
+  Future<void> signInWithGoogle() async {
+    emit(state.copyWith(googleSignInLoading: true, option: none()));
+    final failureOrSuccess = await _facade.signInWithGoogle();
+    emit(state.copyWith(
+      showErrorMessage: false,
+      googleSignInLoading: false,
+      option: optionOf(failureOrSuccess),
+    ));
   }
 }

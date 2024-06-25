@@ -49,10 +49,6 @@ class SignUpPage extends StatelessWidget {
               ),
               TBScreenUtil.vSpace(24),
               const SignUpForm(),
-              TBScreenUtil.vSpace(12),
-              const OrDividerWidget(),
-              TBScreenUtil.vSpace(12),
-              const GoogleSignInButton(),
               TBScreenUtil.vSpace(16),
               AuthRedirectWidget(
                 mainText: 'Already got an account?',

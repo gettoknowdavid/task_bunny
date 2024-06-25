@@ -8,6 +8,7 @@ class AuthException with _$AuthException {
   const factory AuthException.invalidEmailOrPassword() = _InvalidEmailOrPassword;
   const factory AuthException.unableToVerifyEmail() = _UnableToVerifyEmail;
   const factory AuthException.emailAlreadyInUse() = _EmailAlreadyInUse;
+  const factory AuthException.cancelledByUser() = _CancelledByUser;
   const factory AuthException.serverError() = _ServerError;
   const factory AuthException.unknownError() = _UnknownError;
   const factory AuthException.timeOutError() = _TimeOutError;

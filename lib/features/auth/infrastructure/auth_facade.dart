@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:dartz/dartz.dart';
 import 'package:firebase_auth/firebase_auth.dart' as firebase_auth;
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:injectable/injectable.dart';
 import 'package:task_bunny/core/core.dart';
 import 'package:task_bunny/features/auth/domain/domain.dart';
@@ -10,12 +11,15 @@ import 'package:task_bunny/utils/utils.dart';
 @Injectable(as: IAuthFacade)
 class AuthFacade implements IAuthFacade {
   final firebase_auth.FirebaseAuth _firebaseAuth;
+  final GoogleSignIn _googleSignIn;
 
   late final StreamController<AuthStatus> _authStatusController;
 
   AuthFacade({
     required firebase_auth.FirebaseAuth firebaseAuth,
-  }) : _firebaseAuth = firebaseAuth {
+    required GoogleSignIn googleSignIn,
+  })  : _firebaseAuth = firebaseAuth,
+        _googleSignIn = googleSignIn {
     _authStatusController = StreamController<AuthStatus>.broadcast();
     _checkUserChanges();
   }
@@ -89,7 +93,30 @@ class AuthFacade implements IAuthFacade {
   }
 
   @override
-  Future<void> signOut() => _firebaseAuth.signOut();
+  Future<Either<AuthException, Unit>> signInWithGoogle() async {
+    try {
+      final googleUser = await _googleSignIn.signIn().catchError((_) => null);
+      if (googleUser == null) {
+        return left(const AuthException.cancelledByUser());
+      }
+      final googleAuthentication = await googleUser.authentication;
+      final credential = firebase_auth.GoogleAuthProvider.credential(
+        accessToken: googleAuthentication.accessToken,
+        idToken: googleAuthentication.idToken,
+      );
+      await _firebaseAuth.signInWithCredential(credential);
+      _checkUserChanges();
+      return right(unit);
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      return left(AuthException.message(e.message ?? TBStrings.unknownError));
+    }
+  }
+
+  @override
+  Future<void> signOut() => Future.wait([
+        _googleSignIn.signOut(),
+        _firebaseAuth.signOut(),
+      ]);
 
   @override
   Future<Either<AuthException, Unit>> signUp({

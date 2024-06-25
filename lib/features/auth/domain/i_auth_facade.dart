@@ -13,6 +13,7 @@ abstract class IAuthFacade {
 
   Future<Option<Unit>> checkEmailVerified();
 
+
   Future<Either<AuthException, Unit>> sendPasswordResetEmail(Email email);
 
   Future<Either<AuthException, Unit>> sendVerificationEmail();
@@ -21,6 +22,8 @@ abstract class IAuthFacade {
     required Email email,
     required Password password,
   });
+
+  Future<Either<AuthException, Unit>> signInWithGoogle();
 
   Future<void> signOut();
 

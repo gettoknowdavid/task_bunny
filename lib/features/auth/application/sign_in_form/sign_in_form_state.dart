@@ -7,6 +7,7 @@ class SignInFormState with _$SignInFormState {
     required Password password,
     required bool showErrorMessage,
     required bool loading,
+    required bool googleSignInLoading,
     required Option<Either<AuthException, Unit>> option,
   }) = _SignInFormState;
 
@@ -15,6 +16,7 @@ class SignInFormState with _$SignInFormState {
         password: Password(''),
         showErrorMessage: false,
         loading: false,
+        googleSignInLoading: false,
         option: none(),
       );
 }

@@ -22,6 +22,7 @@ class SignInPage extends StatelessWidget {
           (either) => either.fold(
             (exception) => context.showTBSnackBar(exception.maybeWhen(
               orElse: () => TBStrings.unknownError,
+              cancelledByUser: () => TBStrings.cancelledByUser,
               message: (message) => message,
             )),
             (_) => null,

@@ -1,4 +1,5 @@
 export 'insets.dart';
+export 'tb_env/tb_env.dart';
 export 'tb_injector/tb_injector.dart';
 export 'tb_logger/tb_logger.dart';
 export 'tb_router/tb_router.dart';
