@@ -6,8 +6,6 @@ import 'package:task_bunny/core/core.dart';
 import 'package:task_bunny/features/auth/application/application.dart';
 import 'package:task_bunny/utils/utils.dart';
 
-import '../widgets/widgets.dart';
-
 class SignUpForm extends StatefulWidget {
   const SignUpForm({super.key});
 
