@@ -17,8 +17,11 @@ FutureOr<void> main() async {
   runApp(
     ChangeNotifierProvider(
       create: (context) => di<AuthCubit>(),
-      child: BlocProvider(
-        create: (context) => di<AuthCubit>(),
+      child: MultiBlocProvider(
+        providers: [
+          BlocProvider(create: (context) => di<AuthCubit>()),
+          BlocProvider(create: (context) => di<EmailVerificationCubit>()),
+        ],
         child: const AppTB(),
       ),
     ),

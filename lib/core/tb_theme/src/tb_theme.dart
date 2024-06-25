@@ -52,6 +52,17 @@ final class TBTheme {
         ),
       ),
       dividerTheme: DividerThemeData(color: colors.onSurface.withOpacity(0.5)),
+      dialogTheme: DialogTheme(
+        titleTextStyle: TBTextStyle.heading3Bold,
+        contentTextStyle: TBTextStyle.captionBold,
+        alignment: Alignment.center,
+        shape: TBBorderRadius.squircleBorder(
+          side: BorderSide(
+            color: colors.onSurface,
+            width: TBScreenUtil.w(2),
+          ),
+        ),
+      ),
       outlinedButtonTheme: OutlinedButtonThemeData(
         style: ButtonStyle(
           iconSize: TBInternal.all(18),

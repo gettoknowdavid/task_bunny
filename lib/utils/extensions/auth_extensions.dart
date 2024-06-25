@@ -18,14 +18,17 @@ extension AuthX on BuildContext {
     );
   }
 
-  ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showErrorSnackBar(
-    String errorMessage,
-  ) {
+  ScaffoldFeatureController<SnackBar, SnackBarClosedReason> showTBSnackBar(
+    String errorMessage, {
+    bool isError = true,
+  }) {
     final colors = Theme.of(this).colorScheme;
+    final effectiveColor = isError ? colors.error : colors.secondary;
+    final effectiveTextColor = isError ? colors.onError : colors.onSecondary;
     return ScaffoldMessenger.of(this).showSnackBar(
       SnackBar(
-        content: TBText(errorMessage, color: colors.onError),
-        backgroundColor: colors.error,
+        content: TBText(errorMessage, color: effectiveTextColor),
+        backgroundColor: effectiveColor,
         behavior: SnackBarBehavior.floating,
       ),
     );

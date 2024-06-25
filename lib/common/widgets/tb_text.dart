@@ -16,9 +16,10 @@ class TBText extends Text {
 
   @override
   Widget build(BuildContext context) {
+    final colors = Theme.of(context).colorScheme;
     return Text(
       _data,
-      style: style?.copyWith(color: color),
+      style: style?.copyWith(color: color ?? colors.onSurface),
       textAlign: textAlign,
       maxLines: maxLines,
       overflow: overflow,

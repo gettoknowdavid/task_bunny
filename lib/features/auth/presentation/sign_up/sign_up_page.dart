@@ -21,11 +21,13 @@ class SignUpPage extends StatelessWidget {
         state.option.fold(
           () => null,
           (either) => either.fold(
-            (exception) => context.showErrorSnackBar(exception.maybeWhen(
+            (exception) => context.showTBSnackBar(exception.maybeWhen(
               orElse: () => TBStrings.unknownError,
               message: (message) => message,
             )),
-            (_) => null,
+            (_) {
+              context.read<EmailVerificationCubit>().sendVerificationEmail();
+            },
           ),
         );
       },

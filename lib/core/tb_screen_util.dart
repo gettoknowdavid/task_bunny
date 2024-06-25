@@ -23,8 +23,10 @@ final class TBBorderRadius {
     ).r;
   }
 
-  static SmoothBorderRadius squircle(
-      {double radius = 12, double smoothing = 1.0}) {
+  static SmoothBorderRadius squircle({
+    double radius = 12,
+    double smoothing = 1.0,
+  }) {
     return SmoothBorderRadius(cornerRadius: radius, cornerSmoothing: smoothing);
   }
 
@@ -35,8 +37,8 @@ final class TBBorderRadius {
   }) {
     return SmoothRectangleBorder(
       borderRadius: SmoothBorderRadius(
-        cornerRadius: radius,
-        cornerSmoothing: smoothing,
+        cornerRadius: radius.r,
+        cornerSmoothing: smoothing.r,
       ),
       side: side ?? BorderSide.none,
     );

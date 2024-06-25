@@ -17,6 +17,10 @@ class AuthFacade implements IAuthFacade {
     required firebase_auth.FirebaseAuth firebaseAuth,
   }) : _firebaseAuth = firebaseAuth {
     _authStatusController = StreamController<AuthStatus>.broadcast();
+    _checkUserChanges();
+  }
+
+  void _checkUserChanges() {
     _firebaseAuth.userChanges().listen((user) {
       AuthStatus authStatus;
       if (user == null) {
@@ -35,6 +39,22 @@ class AuthFacade implements IAuthFacade {
 
   @override
   User? get currentUser => _firebaseAuth.currentUser.toDomain;
+
+  @override
+  Future<Option<Unit>> checkEmailVerified() async {
+    final firebaseUser = _firebaseAuth.currentUser;
+    if (firebaseUser == null) {
+      return optionOf(null);
+    }
+
+    await firebaseUser.reload();
+
+    if (firebaseUser.emailVerified) {
+      return optionOf(unit);
+    } else {
+      return optionOf(null);
+    }
+  }
 
   @override
   Future<Either<AuthException, Unit>> signIn({
@@ -74,6 +94,21 @@ class AuthFacade implements IAuthFacade {
       result.user?.updateDisplayName(nameStr);
       await result.user?.reload();
       return right(unit);
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      return left(AuthException.message(e.message ?? TBStrings.unknownError));
+    }
+  }
+
+  @override
+  Future<Either<AuthException, Unit>> sendVerificationEmail() async {
+    try {
+      final user = _firebaseAuth.currentUser;
+      if (user != null && !user.emailVerified) {
+        await user.sendEmailVerification();
+        return right(unit);
+      } else {
+        return left(const AuthException.message('You are not signed in'));
+      }
     } on firebase_auth.FirebaseAuthException catch (e) {
       return left(AuthException.message(e.message ?? TBStrings.unknownError));
     }
