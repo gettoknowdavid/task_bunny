@@ -20,20 +20,6 @@ class AuthFacade implements IAuthFacade {
     _checkUserChanges();
   }
 
-  void _checkUserChanges() {
-    _firebaseAuth.userChanges().listen((user) {
-      AuthStatus authStatus;
-      if (user == null) {
-        authStatus = AuthStatus.unauthenticated;
-      } else if (user.emailVerified) {
-        authStatus = AuthStatus.authenticated;
-      } else {
-        authStatus = AuthStatus.unverified;
-      }
-      _authStatusController.add(authStatus);
-    });
-  }
-
   @override
   Stream<AuthStatus> get authStatusChanges => _authStatusController.stream;
 
@@ -53,6 +39,34 @@ class AuthFacade implements IAuthFacade {
       return optionOf(unit);
     } else {
       return optionOf(null);
+    }
+  }
+
+  @override
+  Future<Either<AuthException, Unit>> sendPasswordResetEmail(
+    Email email,
+  ) async {
+    final emailStr = email.value.getOrElse(() => TBStrings.invalidEmail);
+    try {
+      await _firebaseAuth.sendPasswordResetEmail(email: emailStr);
+      return right(unit);
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      return left(AuthException.message(e.message ?? TBStrings.unknownError));
+    }
+  }
+
+  @override
+  Future<Either<AuthException, Unit>> sendVerificationEmail() async {
+    try {
+      final user = _firebaseAuth.currentUser;
+      if (user != null && !user.emailVerified) {
+        await user.sendEmailVerification();
+        return right(unit);
+      } else {
+        return left(const AuthException.message('You are not signed in'));
+      }
+    } on firebase_auth.FirebaseAuthException catch (e) {
+      return left(AuthException.message(e.message ?? TBStrings.unknownError));
     }
   }
 
@@ -99,18 +113,17 @@ class AuthFacade implements IAuthFacade {
     }
   }
 
-  @override
-  Future<Either<AuthException, Unit>> sendVerificationEmail() async {
-    try {
-      final user = _firebaseAuth.currentUser;
-      if (user != null && !user.emailVerified) {
-        await user.sendEmailVerification();
-        return right(unit);
+  void _checkUserChanges() {
+    _firebaseAuth.userChanges().listen((user) {
+      AuthStatus authStatus;
+      if (user == null) {
+        authStatus = AuthStatus.unauthenticated;
+      } else if (user.emailVerified) {
+        authStatus = AuthStatus.authenticated;
       } else {
-        return left(const AuthException.message('You are not signed in'));
+        authStatus = AuthStatus.unverified;
       }
-    } on firebase_auth.FirebaseAuthException catch (e) {
-      return left(AuthException.message(e.message ?? TBStrings.unknownError));
-    }
+      _authStatusController.add(authStatus);
+    });
   }
 }
