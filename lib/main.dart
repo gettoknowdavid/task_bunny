@@ -23,8 +23,11 @@ FutureOr<void> main() async {
       create: (context) => di<AuthCubit>(),
       child: MultiBlocProvider(
         providers: [
-          BlocProvider(create: (context) => di<AuthCubit>()),
-          BlocProvider(create: (context) => di<EmailVerificationCubit>()),
+          BlocProvider(create: (_) => di<AuthCubit>()),
+          BlocProvider(create: (_) => di<SignInFormCubit>()),
+          BlocProvider(create: (_) => di<SignUpFormCubit>()),
+          BlocProvider(create: (_) => di<EmailVerificationCubit>()),
+          BlocProvider(create: (_) => di<ForgotPasswordFormCubit>()),
         ],
         child: const AppTB(),
       ),

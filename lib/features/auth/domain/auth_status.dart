@@ -8,7 +8,12 @@ enum AuthStatus {
 
   unauthenticated(
     redirectPath: TBRoutes.signIn,
-    allowedPaths: [TBRoutes.signUp, TBRoutes.signIn, TBRoutes.forgotPassword],
+    allowedPaths: [
+      TBRoutes.signUp,
+      TBRoutes.signIn,
+      TBRoutes.forgotPassword,
+      TBRoutes.checkYourMail,
+    ],
   ),
 
   authenticated(

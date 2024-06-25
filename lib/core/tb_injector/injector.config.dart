@@ -18,6 +18,8 @@ import 'package:internet_connection_checker/internet_connection_checker.dart'
 import '../../features/auth/application/auth_cubit.dart' as _i11;
 import '../../features/auth/application/email_verification/email_verification_cubit.dart'
     as _i14;
+import '../../features/auth/application/forgot_password/forgot_password_form_cubit.dart'
+    as _i15;
 import '../../features/auth/application/sign_in_form/sign_in_form_cubit.dart'
     as _i12;
 import '../../features/auth/application/sign_up_form/sign_up_form_cubit.dart'
@@ -27,7 +29,7 @@ import '../../features/auth/infrastructure/auth_facade.dart' as _i10;
 import '../../services/mail_service.dart' as _i6;
 import '../../services/network_service.dart' as _i7;
 import '../../services/secure_storage_service.dart' as _i8;
-import 'register_module.dart' as _i15;
+import 'register_module.dart' as _i16;
 
 extension GetItInjectableX on _i1.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -64,8 +66,13 @@ extension GetItInjectableX on _i1.GetIt {
               facade: gh<_i9.IAuthFacade>(),
               mailService: gh<_i6.MailService>(),
             ));
+    gh.lazySingleton<_i15.ForgotPasswordFormCubit>(
+        () => _i15.ForgotPasswordFormCubit(
+              facade: gh<_i9.IAuthFacade>(),
+              mailService: gh<_i6.MailService>(),
+            ));
     return this;
   }
 }
 
-class _$RegisterModule extends _i15.RegisterModule {}
+class _$RegisterModule extends _i16.RegisterModule {}

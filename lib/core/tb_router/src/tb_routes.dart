@@ -8,6 +8,7 @@ final class TBRoutes {
   static const String signUp = '/signUp';
   static const String verification = '/emailVerification';
   static const String forgotPassword = '/forgotPassword';
+  static const String checkYourMail = '/checkYourMail';
   static const String home = '/home';
   static const String loading = '/loading';
 }

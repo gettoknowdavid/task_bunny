@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:go_router/go_router.dart';
 import 'package:task_bunny/common/common.dart';
 import 'package:task_bunny/core/tb_injector/tb_injector.dart';
@@ -40,18 +39,7 @@ class SignInRoute extends GoRouteData {
   const SignInRoute();
 
   @override
-  FutureOr<bool> onExit(BuildContext context, GoRouterState state) {
-    di<SignInFormCubit>().reset();
-    return super.onExit(context, state);
-  }
-
-  @override
-  Widget build(context, state) {
-    return BlocProvider.value(
-      value: di<SignInFormCubit>(),
-      child: const SignInPage(),
-    );
-  }
+  Widget build(context, state) => const SignInPage();
 }
 
 @TypedGoRoute<SignUpRoute>(path: TBRoutes.signUp)
@@ -59,12 +47,7 @@ class SignUpRoute extends GoRouteData {
   const SignUpRoute();
 
   @override
-  Widget build(context, state) {
-    return BlocProvider.value(
-      value: di<SignUpFormCubit>(),
-      child: const SignUpPage(),
-    );
-  }
+  Widget build(context, state) => const SignUpPage();
 }
 
 @TypedGoRoute<EmailVerificationRoute>(path: TBRoutes.verification)
@@ -81,6 +64,14 @@ class ForgotPasswordRoute extends GoRouteData {
 
   @override
   Widget build(context, state) => const ForgotPasswordPage();
+}
+
+@TypedGoRoute<CheckYourMailRoute>(path: TBRoutes.checkYourMail)
+class CheckYourMailRoute extends GoRouteData {
+  const CheckYourMailRoute();
+
+  @override
+  Widget build(context, state) => const CheckYourMailPage();
 }
 
 abstract class TBRouter {
