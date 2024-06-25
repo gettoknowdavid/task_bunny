@@ -4,6 +4,7 @@ import 'package:phosphor_flutter/phosphor_flutter.dart';
 import 'package:task_bunny/common/common.dart';
 import 'package:task_bunny/core/core.dart';
 import 'package:task_bunny/features/auth/application/application.dart';
+import 'package:task_bunny/features/features.dart';
 import 'package:task_bunny/utils/utils.dart';
 
 import '../widgets/widgets.dart';
@@ -33,9 +34,9 @@ class _SignInFormState extends State<SignInForm> {
           TBScreenUtil.vSpace(6),
           Align(
             alignment: Alignment.centerRight,
-            child: TextButton(
-              onPressed: () {},
-              child: const Text('Forgot password?'),
+            child: TBTextButton(
+              label: 'Forgot password?',
+              onTap: () => TBRouter.of(context).push(TBRoutes.forgotPassword),
             ),
           ),
           TBScreenUtil.vSpace(30),

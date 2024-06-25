@@ -11,6 +11,14 @@ import 'package:task_bunny/features/features.dart';
 part 'tb_router.g.dart';
 part 'tb_routes.dart';
 
+@TypedGoRoute<SplashRoute>(path: TBRoutes.splash)
+class SplashRoute extends GoRouteData {
+  const SplashRoute();
+
+  @override
+  Widget build(context, state) => const SplashPage();
+}
+
 @TypedGoRoute<LoadingRoute>(path: TBRoutes.loading)
 class LoadingRoute extends GoRouteData {
   const LoadingRoute();
@@ -67,12 +75,12 @@ class EmailVerificationRoute extends GoRouteData {
   Widget build(context, state) => const EmailVerificationPage();
 }
 
-@TypedGoRoute<SplashRoute>(path: TBRoutes.splash)
-class SplashRoute extends GoRouteData {
-  const SplashRoute();
+@TypedGoRoute<ForgotPasswordRoute>(path: TBRoutes.forgotPassword)
+class ForgotPasswordRoute extends GoRouteData {
+  const ForgotPasswordRoute();
 
   @override
-  Widget build(context, state) => const SplashPage();
+  Widget build(context, state) => const ForgotPasswordPage();
 }
 
 abstract class TBRouter {
